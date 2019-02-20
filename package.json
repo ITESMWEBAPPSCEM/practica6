@@ -1,0 +1,26 @@
+{
+  "name": "practica6",
+  "version": "1.0.0",
+  "description": "Practica 6 de Aplicaciones Web",
+  "main": "base.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "dependencies": {
+    "ejs": "^1.0.0",
+    "express": "^4.6.1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ITESMWEBAPPSCEM/practica6.git"
+  },
+  "keywords": [
+    "EJS"
+  ],
+  "author": "Arturo Amador",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/ITESMWEBAPPSCEM/practica6/issues"
+  },
+  "homepage": "https://github.com/ITESMWEBAPPSCEM/practica6#readme"
+}

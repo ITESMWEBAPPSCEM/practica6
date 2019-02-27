@@ -78,13 +78,13 @@ app.post('/save', (req, res) => {
     }else{
 
         return res.status(404).send({status:false,msj:'no se encontro el usuario'});
-        
+
     }
 });
 
-app.get('/myList', (req,res) => {
+app.get('/getList', (req,res) => {
 
-    let list = test;
+    return res.send({status:true, msj:'exito', data:usuarios});
 
 });
 

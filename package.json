@@ -8,7 +8,8 @@
   },
   "dependencies": {
     "ejs": "^2.5.5",
-    "express": "^4.6.1"
+    "express": "^4.6.1",
+    "express-session": "^1.15.6"
   },
   "repository": {
     "type": "git",

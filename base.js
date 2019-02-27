@@ -1,4 +1,4 @@
-/*const express = require('express');
+const express = require('express');
 const app = express();
 const path = require('path');
 const session = require('express-session');
@@ -14,16 +14,22 @@ app.use(session({
     saveUninitialized: false,
     cookie: { secure: false }
 }));
+app.use(express.json());
 
 app.get('/', (req, res) => {
     //Si el cliente ya tiene una sesión activa, mandar a /mi_lista
     if (req.session.login) return res.redirect('/mi_lista');
-    res.sendFile('index.html', { root: path.join(__dirname, './public') });
+    //res.sendFile('pages/index', { root: path.join(__dirname, './public') });
+    res.render('pages/index');
 });
 
 app.post('/login', (req, res) => {
     //Procesar login, para guardar datos en sesión se puede usar req.session.propiedad = valor;
     let { login, password } = req.body;
+    console.log(req.body);
+    console.log(req.body.user);
+    console.log(req.body.password);
+
     if (usuarios.hasOwnProperty(login)) {
         if (usuarios[login] === password) {
             req.session.login = login;
@@ -39,13 +45,13 @@ app.get('/mi_lista', (req, res) => {
     // Desplegar lista en archivo EJS
 });
 
-const port = process.env.PORT || 3000;
+const port = process.env.PORT || 8080;
 
-app.listen(port, () => console.log(`Escuchando en puerto ${port}...`));*/
+app.listen(port, () => console.log(`Escuchando en puerto ${port}...`));
 
 // server.js
 // load the things we need
-var express = require('express');
+/*var express = require('express');
 var app = express();
 
 // set the view engine to ejs
@@ -64,4 +70,4 @@ app.get('/about', function (req, res) {
 });
 
 app.listen(8080);
-console.log('8080 is the magic port');
+console.log('8080 is the magic port');*/

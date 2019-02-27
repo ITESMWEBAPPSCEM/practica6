@@ -2,8 +2,12 @@ const express = require('express');
 const app = express();
 const path = require('path');
 const session = require('express-session');
+const redirect = require("express-redirect");
 
-const usuarios = {};
+const usuarios = {
+    login:"test@mail.com",
+    password:"123456"
+};
 
 app.use("/public", express.static(path.join(__dirname, 'public')));
 app.use(express.urlencoded({ extended: false }));
@@ -15,10 +19,11 @@ app.use(session({
     cookie: { secure: false }
 }));
 app.use(express.json());
+redirect(app);
 
 app.get('/', (req, res) => {
     //Si el cliente ya tiene una sesión activa, mandar a /mi_lista
-    if (req.session.login) return res.redirect('/mi_lista');
+    if (req.session.login) return res.redirect('pages/mi_lista');
     //res.sendFile('pages/index', { root: path.join(__dirname, './public') });
     res.render('pages/index');
 });
@@ -29,16 +34,19 @@ app.post('/login', (req, res) => {
     console.log(req.body);
     console.log(req.body.user);
     console.log(req.body.password);
-
+    
     if (usuarios.hasOwnProperty(login)) {
+        console.log('dentro de if has Own Property');
         if (usuarios[login] === password) {
+            console.log('dentro de password');
             req.session.login = login;
-            return res.redirect('mi_lista');
+            return res.render('pages/mi_lista');
         }
     }
+    console.log('else');
     usuarios[login] = password;
     req.session.login = login;
-    return res.redirect('mi_lista');
+    return res.redirect(401,'pages/index');
 });
 
 app.get('/mi_lista', (req, res) => {
@@ -48,26 +56,3 @@ app.get('/mi_lista', (req, res) => {
 const port = process.env.PORT || 8080;
 
 app.listen(port, () => console.log(`Escuchando en puerto ${port}...`));
-
-// server.js
-// load the things we need
-/*var express = require('express');
-var app = express();
-
-// set the view engine to ejs
-app.set('view engine', 'ejs');
-
-// use res.render to load up an ejs view file
-
-// index page 
-app.get('/', function (req, res) {
-    res.render('pages/index');
-});
-
-// about page 
-app.get('/about', function (req, res) {
-    res.render('pages/about');
-});
-
-app.listen(8080);
-console.log('8080 is the magic port');*/

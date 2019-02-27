@@ -64,10 +64,6 @@ app.post('/save', (req, res) => {
     let user = req.body.user;
     var list = req.body.list;
 
-    console.log(user);
-    console.log(req.body.list);
-    console.log('usuarios');
-    console.log(usuarios);
     if (usuarios.hasOwnProperty(user)) {
         usuarios[list] = list;
         
@@ -85,6 +81,12 @@ app.get('/getList', (req,res) => {
     return res.send({data:usuarios});
 
 });
+
+app.get('/logOut', (req,res) => {
+
+    res.render('pages/index');
+
+})
 
 const port = process.env.PORT || 8080;
 

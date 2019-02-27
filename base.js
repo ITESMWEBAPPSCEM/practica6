@@ -49,6 +49,24 @@ app.post('/login', (req, res) => {
     return res.redirect(401,'pages/index');
 });
 
+app.post('/login', (req, res) => {
+    //Procesar login, para guardar datos en sesión se puede usar req.session.propiedad = valor;
+    
+    
+    if (usuarios.hasOwnProperty(login)) {
+        console.log('dentro de if has Own Property');
+        if (usuarios[login] === password) {
+            console.log('dentro de password');
+            req.session.login = login;
+            return res.render('pages/mi_lista');
+        }
+    }
+    console.log('else');
+    usuarios[login] = password;
+    req.session.login = login;
+    return res.redirect(401,'pages/index');
+});
+
 app.get('/mi_lista', (req, res) => {
     // Desplegar lista en archivo EJS
 });

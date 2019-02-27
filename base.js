@@ -20,9 +20,7 @@ app.use(express.json());
 redirect(app);
 
 app.get('/', (req, res) => {
-    //Si el cliente ya tiene una sesión activa, mandar a /mi_lista
-    if (req.session.login) return res.redirect('pages/mi_lista');
-    //res.sendFile('pages/index', { root: path.join(__dirname, './public') });
+    if (req.session.login) return res.render('pages/mi_lista');
     res.render('pages/index');
 });
 
@@ -84,7 +82,7 @@ app.post('/save', (req, res) => {
 
 app.get('/getList', (req,res) => {
 
-    return res.send({status:true, msj:'exito', data:usuarios});
+    return res.send({data:usuarios});
 
 });
 

@@ -83,7 +83,7 @@ app.get('/getList', (req,res) => {
 });
 
 app.get('/logOut', (req,res) => {
-
+    req.session.destroy();
     res.render('pages/index');
 
 })

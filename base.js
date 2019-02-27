@@ -67,8 +67,23 @@ app.post('/login', (req, res) => {
     return res.redirect(401,'pages/index');
 });
 
-app.get('/mi_lista', (req, res) => {
+app.post('/save', (req, res) => {
     // Desplegar lista en archivo EJS
+    let user = req.body.user;
+    let list = req.body.list;
+    if (usuarios.hasOwnProperty(user)) {
+        usuarios.list = list;
+
+        return res.send({status:true, msj:'exito', data:usuarios})
+    }else{
+        return res.status(404).send({status:false,msj:'no se encontro el usuario'})
+    }
+});
+
+app.get('/myList', (req,res) => {
+
+    let list = test;
+
 });
 
 const port = process.env.PORT || 8080;

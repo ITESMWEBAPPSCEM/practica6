@@ -5,8 +5,6 @@ const session = require('express-session');
 const redirect = require("express-redirect");
 
 const usuarios = {
-    login:"test@mail.com",
-    password:"123456"
 };
 
 app.use("/public", express.static(path.join(__dirname, 'public')));
@@ -31,14 +29,10 @@ app.get('/', (req, res) => {
 app.post('/login', (req, res) => {
     //Procesar login, para guardar datos en sesión se puede usar req.session.propiedad = valor;
     let { login, password } = req.body;
-    console.log(req.body);
-    console.log(req.body.user);
-    console.log(req.body.password);
     
     if (usuarios.hasOwnProperty(login)) {
         console.log('dentro de if has Own Property');
         if (usuarios[login] === password) {
-            console.log('dentro de password');
             req.session.login = login;
             return res.render('pages/mi_lista');
         }
@@ -70,13 +64,21 @@ app.post('/login', (req, res) => {
 app.post('/save', (req, res) => {
     // Desplegar lista en archivo EJS
     let user = req.body.user;
-    let list = req.body.list;
-    if (usuarios.hasOwnProperty(user)) {
-        usuarios.list = list;
+    var list = req.body.list;
 
-        return res.send({status:true, msj:'exito', data:usuarios})
+    console.log(user);
+    console.log(req.body.list);
+    console.log('usuarios');
+    console.log(usuarios);
+    if (usuarios.hasOwnProperty(user)) {
+        usuarios[list] = list;
+        
+        return res.send({status:true, msj:'exito', data:usuarios});
+
     }else{
-        return res.status(404).send({status:false,msj:'no se encontro el usuario'})
+
+        return res.status(404).send({status:false,msj:'no se encontro el usuario'});
+        
     }
 });
 
